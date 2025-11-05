@@ -1,5 +1,5 @@
 const express = require('express')
-const cors = require('cors');
+// const cors = require('cors');
 const path = require("path");
 const fs = require("fs");
 var cookie = require('cookie');
@@ -17,7 +17,7 @@ const apiLimiter = rateLimit({
   
 app.use('/api', apiLimiter)
 
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "frontend", "build")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -49,7 +49,7 @@ app.use(express.json());
 
 // home page routing
 app.get("/", (req, res) => {
-	res.sendFile("./dist" + path + "index.html");
+	res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
 });
 
 // load backend routes
